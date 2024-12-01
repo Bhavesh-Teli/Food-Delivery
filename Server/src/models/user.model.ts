@@ -10,12 +10,12 @@ export interface IUser {
   country: string;
   propfilePicture: string;
   admin?: boolean;
-  lastLogin?: boolean;
+  lastLogin?: Date;
   isVerified?: boolean;
   resetPasswordToken?: string;
   resetPasswordTokenExpiresAt?: Date;
   verificationToken?: string;
-  verifcationTokenExpiresAt?: Date;
+  verificationTokenExpiresAt?: Date;
 }
 
 export interface IUserDocument extends IUser, Document {
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema<IUserDocument>({
   },
   propfilePicture: {
     type: String,
-    required: true,
+    default:"",
   },
   admin: {
     type: Boolean,
@@ -71,7 +71,7 @@ const userSchema = new mongoose.Schema<IUserDocument>({
   resetPasswordToken:String,
   resetPasswordTokenExpiresAt:Date,
   verificationToken:String,
-  verifcationTokenExpiresAt:Date,
+  verificationTokenExpiresAt:Date,
 },{timestamps:true});
 
 export const User : Model<IUserDocument> = mongoose.model<IUserDocument>("User",userSchema);
